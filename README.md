@@ -1,2 +1,2 @@
-# AdventOfCode2020
-My Advent of Code 2020 solutions
+# AdventOfCode2021
+My Advent of Code 2021 solutions
