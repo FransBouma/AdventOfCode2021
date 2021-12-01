@@ -18,11 +18,12 @@ namespace AoC2021.Core
 		public static int Solve2(List<int> input)
 		{
 			int numberOfIncreases = 0;
+			int previousSlidingWindowValue = input[0] + input[1] + input[2];
 			for(int i=1;i<input.Count-2;i++)
 			{
-				var previousSlidingWindowValue = input[i - 1] + input[i] + input[i + 1];
 				var currentSlidingWindowValue = input[i] + input[i + 1] + input[i + 2];
 				numberOfIncreases += previousSlidingWindowValue < currentSlidingWindowValue ? 1 : 0;
+				previousSlidingWindowValue = currentSlidingWindowValue;
 			}
 			return numberOfIncreases;
 		}
