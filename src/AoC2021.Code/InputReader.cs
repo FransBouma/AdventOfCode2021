@@ -21,5 +21,23 @@ namespace AoC2021.Core
 			}
 			return toReturn;
 		}
+
+
+		public static List<string> GetInputAsStringList(string pathFilename)
+		{
+			var toReturn = new List<string>();
+			using(var reader = File.OpenText(pathFilename))
+			{
+				while(!reader.EndOfStream)
+				{
+					var line = reader.ReadLine();
+					if(!string.IsNullOrWhiteSpace(line))
+					{
+						toReturn.Add(line);
+					}
+				}
+			}
+			return toReturn;
+		}
 	}
 }
