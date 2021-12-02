@@ -11,28 +11,32 @@ namespace AoC2021.Core
 			int depthAmount = 0;
 			foreach(var commandAsString in input)
 			{
-				var elements = commandAsString.Split(' ');
-				if(elements.Length != 2)
+				int indexOfSpace = commandAsString.IndexOf(' ');
+				if(indexOfSpace < 0)
 				{
 					continue;
 				}
 
-				string command = elements[0];
-				int amount = 0;
-				if(!int.TryParse(elements[1], out amount))
+				// 0123456789
+				// forward 5
+				// indexSpace == 7
+				var commandFragment = commandAsString.AsSpan(0, indexOfSpace);
+				var amountFragment = commandAsString.AsSpan(indexOfSpace+1, (commandAsString.Length - (indexOfSpace + 1)));
+
+				if(!int.TryParse(amountFragment, out var amount))
 				{
 					continue;
 				}
 
-				switch(command)
+				switch(commandFragment)
 				{
-					case "forward":
+					case var s when s.Equals("forward", StringComparison.Ordinal):
 						forwardAmount += amount;
 						break;
-					case "down":
+					case var s when s.Equals("down", StringComparison.Ordinal):
 						depthAmount += amount;
 						break;
-					case "up":
+					case var s when s.Equals("up", StringComparison.Ordinal):
 						depthAmount -= amount;
 						break;
 				}
@@ -48,29 +52,33 @@ namespace AoC2021.Core
 			int depthAmount = 0;
 			foreach(var commandAsString in input)
 			{
-				var elements = commandAsString.Split(' ');
-				if(elements.Length != 2)
+				int indexOfSpace = commandAsString.IndexOf(' ');
+				if(indexOfSpace < 0)
 				{
 					continue;
 				}
 
-				string command = elements[0];
-				int amount = 0;
-				if(!int.TryParse(elements[1], out amount))
+				// 0123456789
+				// forward 5
+				// indexSpace == 7
+				var commandFragment = commandAsString.AsSpan(0, indexOfSpace);
+				var amountFragment = commandAsString.AsSpan(indexOfSpace+1, (commandAsString.Length - (indexOfSpace + 1)));
+
+				if(!int.TryParse(amountFragment, out var amount))
 				{
 					continue;
 				}
 
-				switch(command)
+				switch(commandFragment)
 				{
-					case "forward":
+					case var s when s.Equals("forward", StringComparison.Ordinal):
 						forwardAmount += amount;
 						depthAmount += aimAmount * amount;
 						break;
-					case "down":
+					case var s when s.Equals("down", StringComparison.Ordinal):
 						aimAmount += amount;
 						break;
-					case "up":
+					case var s when s.Equals("up", StringComparison.Ordinal):
 						aimAmount -= amount;
 						break;
 				}
