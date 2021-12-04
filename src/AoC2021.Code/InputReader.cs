@@ -47,6 +47,8 @@ namespace AoC2021.Core
 				currentCard.AddRow(allLines[i], row);
 				row++;
 			}
+			// toss out any invalid bingo cards
+			toReturn.Sanitize();
 			
 			return toReturn;
 		}
