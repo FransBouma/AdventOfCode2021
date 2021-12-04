@@ -20,8 +20,8 @@ namespace AoC2021.Core
 
 		public BingoCard()
 		{
-			_numberOfMarkedNumbersPerColumn = new List<int>() {0,0,0,0,0};
-			_numberOfMarkedNumbersPerRow = new List<int>() {0,0,0,0,0};
+			_numberOfMarkedNumbersPerColumn = new List<int>();
+			_numberOfMarkedNumbersPerRow = new List<int>();
 			_unmarkedNumbers = new HashSet<int>();
 			_boardPositionPerNumber = new Dictionary<int, BoardPosition>();
 			this.Wins = false;
@@ -49,6 +49,15 @@ namespace AoC2021.Core
 				_unmarkedNumbers.Add(number);
 				column++;
 			}
+
+			if(_numberOfMarkedNumbersPerColumn.Count <= 0)
+			{
+				for(int i = 0; i < column; i++)
+				{
+					_numberOfMarkedNumbersPerColumn.Add(0);
+					_numberOfMarkedNumbersPerRow.Add(0);
+				}
+			}
 		}
 
 
@@ -64,20 +73,26 @@ namespace AoC2021.Core
 			var position = _boardPositionPerNumber[numberDrawn];
 			_numberOfMarkedNumbersPerColumn[position.Column]++;
 			_numberOfMarkedNumbersPerRow[position.Row]++;
-			if(_numberOfMarkedNumbersPerColumn[position.Column] >= 5 || _numberOfMarkedNumbersPerRow[position.Row] >= 5)
+			if(_numberOfMarkedNumbersPerColumn[position.Column] >= _numberOfMarkedNumbersPerColumn.Count || _numberOfMarkedNumbersPerRow[position.Row] >= _numberOfMarkedNumbersPerRow.Count)
 			{
 				this.Wins = true;
 			}
 		}
 
 
-		public int GetSumOfUnmarkedNumbers()
+		public long GetSumOfUnmarkedNumbers()
 		{
-			return _unmarkedNumbers.Sum();
+			long toReturn = 0;
+			foreach(var n in _unmarkedNumbers)
+			{
+				toReturn += n;
+			}
+			//return _unmarkedNumbers.Sum();
+			return toReturn;
 		}
 		
 		public bool Wins { get; private set; }
 		public int CardNo { get; set; }		// for testing
-		public bool IsValid => _boardPositionPerNumber.Count == 25;
+		public bool IsValid => _boardPositionPerNumber.Count > 0 && _boardPositionPerNumber.Count == _numberOfMarkedNumbersPerColumn.Count * _numberOfMarkedNumbersPerRow.Count;
 	}
 }
