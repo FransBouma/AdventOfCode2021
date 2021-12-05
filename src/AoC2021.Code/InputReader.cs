@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AoC2021.Core.Day5Classes;
 
 namespace AoC2021.Core
 {
@@ -15,6 +16,12 @@ namespace AoC2021.Core
 		public static List<string> GetInputAsStringList(string pathFilename)
 		{
 			return new List<string>(File.ReadLines(pathFilename));
+		}
+
+
+		public static List<LineSegment> GetInputAsLineSegments(string pathFilename)
+		{
+			return GetInputAsStringList(pathFilename).Select(s=>new LineSegment(s)).ToList();
 		}
 
 
