@@ -7,8 +7,23 @@ namespace AoC2021.Core
 {
 	public static class InputReader
 	{
-		public static List<int> GetInputAsIntList(string pathFilename)
+		public static List<int> GetInputAsIntList(string pathFilename, bool commaSeparated = false)
 		{
+			if(commaSeparated)
+			{
+				var lines = GetInputAsStringList(pathFilename);
+				var toReturn = new List<int>();
+				foreach(var l in lines)
+				{
+					if(string.IsNullOrWhiteSpace(l))
+					{
+						continue;
+					}
+					toReturn.AddRange(l.Split(',').Select(f=>int.Parse(f)));
+				}
+
+				return toReturn;
+			}
 			return File.ReadLines(pathFilename).Select(l => int.Parse(l)).ToList();
 		}
 
