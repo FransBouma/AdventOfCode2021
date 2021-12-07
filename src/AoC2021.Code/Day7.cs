@@ -29,7 +29,12 @@ namespace AoC2021.Core
 		public static long Solve2(List<int> input)
 		{
 			var rangeToConsider = Enumerable.Range(input.Min(), input.Max()).ToList();
-			return GetPositionToMoveTo(input, rangeToConsider, (position, value) => Enumerable.Range(1, Math.Abs(position - value)).Sum());
+			// using the range formula for 1+2+3+...+n instead of Enumerable.Range(1, Math.Abs(position - value)).Sum()), this is much faster. 
+			return GetPositionToMoveTo(input, rangeToConsider, (position, value) =>
+															   {
+																   var dist = Math.Abs(position - value);
+																   return dist * (dist + 1) / 2;
+															   });
 		}
 	}
 }
