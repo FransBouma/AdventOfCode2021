@@ -4,4 +4,8 @@
 		<TargetFramework>net6.0</TargetFramework>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="SD.Tools.Algorithmia" Version="1.4.0" />
+	</ItemGroup>
+
 </Project>
