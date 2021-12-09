@@ -68,21 +68,9 @@ namespace AoC2021.Core
 
 		private static void MarkBasinMembers(int[,] input, int x, int y, bool[,] markedBasinCells, ref int numberOfCellsInBasin)
 		{
-			if(x < 0 || x >= input.GetLength(0) || y < 0 || y >= input.GetLength(1))
+			if(x < 0 || x >= input.GetLength(0) || y < 0 || y >= input.GetLength(1) || markedBasinCells[x, y] || input[x, y] == 9)
 			{
-				// out of bounds, cell doesn't exit
-				return;
-			}
-
-			if(markedBasinCells[x, y])
-			{
-				// already marked/seen
-				return;
-			}
-
-			if(input[x, y] == 9)
-			{
-				// top height, not part of a basin
+				// out of bounds, cell doesn't exist, or cell already marked/seen or input is top height
 				return;
 			}
 			// mark it and then check if its top/right/bottom/left cells are also part of it
