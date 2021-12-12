@@ -141,10 +141,9 @@ namespace AoC2021.Core
 							// never visit start nor end twice, or already a small cave and not start/end in the path, not allowed
 							continue;
 						}
-						var q = from v in p.Where(v => v.VertexType == VertexType.NormalNode && v.IsLowerCase)
-								group v by v.VertexText
-								into g
-								select new { g.Key, Amount= g.Count() };
+						var q = p.Where(v => v.VertexType == VertexType.NormalNode && v.IsLowerCase)
+								 .GroupBy(v => v.VertexText)
+								 .Select(g => new { Amount = g.Count() });
 						if(q.Any(g => g.Amount == 2))
 						{
 							continue;
