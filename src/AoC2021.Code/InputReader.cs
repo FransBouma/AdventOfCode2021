@@ -2,12 +2,47 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AoC2021.Core.Day13Classes;
 using AoC2021.Core.Day5Classes;
 
 namespace AoC2021.Core
 {
 	public static class InputReader
 	{
+		public static Paper GetInputAsDay13Paper(string pathFilename)
+		{
+			var lines = GetInputAsStringList(pathFilename);
+			var toReturn = new Paper();
+
+			int lineIndex = 0;
+			// points
+			while(!string.IsNullOrWhiteSpace(lines[lineIndex]))
+			{
+				var fragments = lines[lineIndex].Split(',');
+				toReturn.AddDot(int.Parse(fragments[0]), int.Parse(fragments[1]));
+				lineIndex++;
+			}
+
+			lineIndex++;
+			// fold commands
+			for(int i = lineIndex; i < lines.Count; i++)
+			{
+				int x = 0;
+				int y = 0;
+				var fragments = lines[i].Split('=');
+				if(fragments[0].Contains("x"))
+				{
+					x += int.Parse(fragments[1]);
+				}
+				else
+				{
+					y += int.Parse(fragments[1]);
+				}
+				toReturn.AddFoldCommand(x, y);
+			}
+			return toReturn;
+		}
+		
 		public static List<int> GetInputAsIntList(string pathFilename, bool commaSeparated = false)
 		{
 			if(commaSeparated)
