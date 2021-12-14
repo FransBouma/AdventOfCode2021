@@ -3,12 +3,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AoC2021.Core.Day13Classes;
+using AoC2021.Core.Day14Classes;
 using AoC2021.Core.Day5Classes;
 
 namespace AoC2021.Core
 {
 	public static class InputReader
 	{
+		public static PolymerProducer GetInputAsDay14PolymerProducer(string pathFilename)
+		{
+			var lines = GetInputAsStringList(pathFilename);
+
+			var toReturn = new PolymerProducer();
+			toReturn.SetTemplate(lines[0]);
+			for(int i = 2; i < lines.Count; i++)
+			{
+				var fragments = lines[i].Split(" -> ");
+				toReturn.AddPairInsertionRule(fragments[0], fragments[1].Trim()[0]);
+			}
+			return toReturn;
+		}
+		
 		public static Paper GetInputAsDay13Paper(string pathFilename)
 		{
 			var lines = GetInputAsStringList(pathFilename);
