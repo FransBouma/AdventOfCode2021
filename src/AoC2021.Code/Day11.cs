@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace AoC2021.Core
+namespace AoC2021.Core.Day11
 {
 	public class Grid
 	{

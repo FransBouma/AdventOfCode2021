@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using AoC2021.Core;
+using AoC2021.Core.Day11;
 using NUnit.Framework;
 
 namespace AoC2021.Tests
