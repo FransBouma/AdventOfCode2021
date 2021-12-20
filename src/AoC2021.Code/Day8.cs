@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using AoC2021.Core.Day5Classes;
 using SD.Tools.BCLExtensions.CollectionsRelated;
 
 namespace AoC2021.Core
